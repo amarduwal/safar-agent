@@ -54,9 +54,10 @@ export async function sendNGONotification(
   caseFile: CaseFile,
   worker: WorkerProfile
 ): Promise<void> {
+  const workerName = worker.name.en || worker.name.ne;
   const message = `[SAFAR ALERT] NEW CASE: ${caseFile.caseId}
 
-Worker: ${worker.name.en} | ${worker.destination.country}
+Worker: ${workerName} | ${worker.destination.country}
 Employer: ${worker.destination.employer}
 Violation: ${caseFile.violationType.replace(/_/g, ' ').toUpperCase()}
 Severity: ${caseFile.severity}

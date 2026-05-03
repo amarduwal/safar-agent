@@ -140,12 +140,20 @@ export async function runSAFARAgent(ctx: AgentContext): Promise<AgentResponse> {
 
       // Notify NGO via WhatsApp if available
       if (ngos[0].whatsapp) {
-        await sendNGONotification(ngos[0].whatsapp, caseFile, ctx.worker);
-        actionsTaken.push('NGO notified');
-        await appendTimeline(caseFile.caseId, {
-          action: `NGO ${ngos[0].name} notified via WhatsApp`,
-          actor: 'safar_agent',
-        });
+        try {
+          await sendNGONotification(ngos[0].whatsapp, caseFile, ctx.worker);
+          actionsTaken.push('NGO notified');
+          await appendTimeline(caseFile.caseId, {
+            action: `NGO ${ngos[0].name} notified via WhatsApp`,
+            actor: 'safar_agent',
+          });
+        } catch (err) {
+          console.warn(`[SAFAR Agent] Could not reach NGO ${ngos[0].name} on WhatsApp:`, (err as Error).message);
+          await appendTimeline(caseFile.caseId, {
+            action: `NGO ${ngos[0].name} WhatsApp delivery failed — case assigned for manual follow-up`,
+            actor: 'safar_agent',
+          });
+        }
       }
 
       actions.push({ type: 'notify_ngo', ngoName: ngos[0].name, caseFile });
@@ -172,14 +180,18 @@ export async function runSAFARAgent(ctx: AgentContext): Promise<AgentResponse> {
   }
 
   // Step 5: Notify family
-  await sendFamilyAlert(
-    ctx.worker.familyPhone,
-    ctx.worker.name.ne,
-    finalSeverity,
-    sentiment.detectedIssues.join(', '),
-    caseFile?.caseId
-  );
-  actionsTaken.push('Family notified');
+  try {
+    await sendFamilyAlert(
+      ctx.worker.familyPhone,
+      ctx.worker.name.ne,
+      finalSeverity,
+      sentiment.detectedIssues.join(', '),
+      caseFile?.caseId
+    );
+    actionsTaken.push('Family notified');
+  } catch (err) {
+    console.warn('[SAFAR Agent] Could not reach family on WhatsApp:', (err as Error).message);
+  }
   actions.push({
     type: 'notify_family',
     message: sentiment.detectedIssues.join(', '),
