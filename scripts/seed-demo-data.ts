@@ -4,7 +4,7 @@
  */
 import 'dotenv/config';
 import { getDb, closeDb } from '../src/services/mongodb/client';
-import { WorkerProfile, CaseFile, EmployerRecord, RecruiterRecord } from '../src/types';
+import type { WorkerProfile, CaseFile, EmployerRecord, RecruiterRecord } from '../src/types';
 import { v4 as uuidv4 } from 'uuid';
 
 const DEMO_WORKERS: Omit<WorkerProfile, '_id'>[] = [

@@ -1,5 +1,5 @@
 import { getDb } from './client';
-import { EmployerRecord, RecruiterRecord } from '../../types';
+import type { EmployerRecord, RecruiterRecord } from '../../types';
 
 export async function getEmployerRecord(company: string, country: string): Promise<EmployerRecord | null> {
   const db = await getDb();

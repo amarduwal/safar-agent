@@ -1,9 +1,9 @@
-import { Router, Request, Response } from 'express';
-import { getWorkerByPhone, getWorkerById, getFamilyDashboardData, getAllAbroad } from '../services/mongodb/workers';
+import { Router, type Request, type Response } from 'express';
+import { getWorkerById, getFamilyDashboardData, getAllAbroad } from '../services/mongodb/workers';
 import { getCasesByWorkerId, getActiveCases } from '../services/mongodb/cases';
 import { getRecruiterByName } from '../services/mongodb/employers';
 import { searchEmployerIntelligence } from '../services/elastic/search';
-import { ApiResponse } from '../types';
+import type { ApiResponse } from '../types';
 
 export const apiRouter = Router();
 

@@ -1,5 +1,5 @@
 import { getDb } from './client';
-import { CaseFile, TimelineEntry, Evidence, SeverityLevel } from '../../types';
+import type { CaseFile, TimelineEntry, Evidence } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
 import crypto from 'crypto';
 

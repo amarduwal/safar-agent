@@ -10,7 +10,8 @@
     "seed:elastic": "tsx scripts/seed-elastic.ts",
     "seed:demo": "tsx scripts/seed-demo-data.ts",
     "deadman": "tsx scripts/run-deadman-switch.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/ scripts/"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.13.0",
@@ -38,6 +39,10 @@
     "@types/node-cron": "^3.0.11",
     "@types/pdfkit": "^0.13.4",
     "@types/uuid": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.1",
+    "@typescript-eslint/parser": "^8.59.1",
+    "eslint": "^9.39.4",
+    "eslint-plugin-import": "^2.32.0",
     "tsx": "^4.15.1",
     "typescript": "^5.4.5"
   },

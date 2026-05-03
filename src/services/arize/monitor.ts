@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { config } from '../../config';
-import { SeverityLevel } from '../../types';
+import type { SeverityLevel } from '../../types';
 
 interface PredictionRecord {
   predictionId: string;

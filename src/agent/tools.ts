@@ -1,4 +1,4 @@
-import { Tool, SchemaType } from '@google/generative-ai';
+import { type Tool, SchemaType } from '@google/generative-ai';
 
 export const SAFAR_TOOLS: Tool[] = [
   {

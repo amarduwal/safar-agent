@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { getElastic, INDICES, ensureIndices } from '../src/services/elastic/client';
-import { LaborLaw, NGORecord } from '../src/types';
+import type { LaborLaw, NGORecord } from '../src/types';
 
 const LAWS: LaborLaw[] = [
   // Qatar

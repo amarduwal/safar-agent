@@ -1,5 +1,5 @@
 import { getDb } from './client';
-import { WorkerProfile, CheckIn, SeverityLevel } from '../../types';
+import type { WorkerProfile, CheckIn, SeverityLevel } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
 
 const COL = 'workers';

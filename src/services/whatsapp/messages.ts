@@ -1,5 +1,5 @@
 import { sendTextMessage, sendInteractiveButtons } from './client';
-import { SeverityLevel, CaseFile, WorkerProfile } from '../../types';
+import type { SeverityLevel, CaseFile, WorkerProfile } from '../../types';
 import { config } from '../../config';
 
 const SEVERITY_EMOJI: Record<SeverityLevel, string> = {
@@ -74,7 +74,7 @@ Contact worker family: ${worker.familyPhone}
   await sendTextMessage(ngoPhone, message);
 }
 
-export async function sendRegistrationConfirmation(phone: string, workerNameNe: string, destination: string): Promise<void> {
+export async function sendRegistrationConfirmation(phone: string, workerNameNe: string, _destination: string): Promise<void> {
   const message = `सफरमा स्वागत छ, ${workerNameNe}! 🙏
 
 तपाईंको दर्ता सम्पन्न भयो।

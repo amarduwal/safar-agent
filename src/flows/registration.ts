@@ -2,8 +2,8 @@ import { createWorker } from '../services/mongodb/workers';
 import { searchEmployerIntelligence } from '../services/elastic/search';
 import { sendTextMessage } from '../services/whatsapp/client';
 import { sendRegistrationConfirmation as sendConfirmation } from '../services/whatsapp/messages';
-import { WorkerProfile } from '../types';
-import { COUNTRY_NAMES } from '../config';
+import type { WorkerProfile } from '../types';
+import { COUNTRY_NAMES, config } from '../config';
 
 // In-memory state for multi-step registration (use Redis in production)
 const registrationSessions = new Map<string, Partial<WorkerProfile> & { step: number }>();
@@ -104,7 +104,7 @@ export async function handleRegistrationFlow(phone: string, message: string): Pr
       // Notify family
       await sendTextMessage(
         worker.familyPhone,
-        `सफरमा दर्ता भयो 🙏\n\n${worker.name.ne} (${worker.destination.countryName}) को दर्ता सम्पन्न।\nहरेक आइतबार Check-in आउनेछ।\n\nDashboard: ${process.env.DASHBOARD_URL}/family`
+        `सफरमा दर्ता भयो 🙏\n\n${worker.name.ne} (${worker.destination.countryName}) को दर्ता सम्पन्न।\nहरेक आइतबार Check-in आउनेछ।\n\nDashboard: ${config.dashboardUrl}/family`
       );
 
       const warningMsg = employerCheck.safetyScore < 60

@@ -2,7 +2,7 @@ import { analyzeContract } from '../services/gemini/analyze';
 import { updateContract } from '../services/mongodb/workers';
 import { sendContractAnalysisResult } from '../services/whatsapp/messages';
 import { sendTextMessage } from '../services/whatsapp/client';
-import { WorkerProfile } from '../types';
+import type { WorkerProfile } from '../types';
 import { MINIMUM_WAGES_NPR } from '../config';
 
 export async function analyzeWorkerContract(
@@ -51,7 +51,6 @@ export async function analyzeWorkerContract(
       `✈️ फिर्ती टिकट: ${analysis.extractedTerms.returnTicketIncluded ? '✅ समावेश' : '❌ समावेश छैन'}\n` +
       `\n${redFlagText}`;
 
-    const { sendTextMessage: sendText } = await import('../services/whatsapp/client');
-    await sendText(worker.familyPhone, familyReport);
+    await sendTextMessage(worker.familyPhone, familyReport);
   }
 }

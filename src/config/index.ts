@@ -1,12 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-function require(key: string): string {
-  const val = process.env[key];
-  if (!val) throw new Error(`Missing required env var: ${key}`);
-  return val;
-}
-
 function optional(key: string, fallback: string): string {
   return process.env[key] ?? fallback;
 }
@@ -62,7 +56,6 @@ export const config = {
   },
 } as const;
 
-// Destination country names
 export const COUNTRY_NAMES: Record<string, string> = {
   QA: 'Qatar',
   AE: 'United Arab Emirates',
@@ -77,7 +70,6 @@ export const COUNTRY_NAMES: Record<string, string> = {
   OM: 'Oman',
 };
 
-// Nepal Embassy contacts per destination country
 export const EMBASSY_CONTACTS: Record<string, { name: string; phone: string; email: string; laborDesk: string }> = {
   QA: {
     name: 'Embassy of Nepal, Doha',
@@ -111,7 +103,6 @@ export const EMBASSY_CONTACTS: Record<string, { name: string; phone: string; ema
   },
 };
 
-// Partner NGOs
 export const NGO_CONTACTS = [
   {
     name: 'Pourakhi Nepal',
@@ -139,7 +130,6 @@ export const NGO_CONTACTS = [
   },
 ];
 
-// Qatar minimum wages by sector (NPR equivalent, 2026)
 export const MINIMUM_WAGES_NPR: Record<string, Record<string, number>> = {
   QA: {
     construction: 45000,

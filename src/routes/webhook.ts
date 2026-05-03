@@ -1,14 +1,12 @@
-import { Router, Request, Response } from 'express';
+import { Router, type Request, type Response } from 'express';
 import { config } from '../config';
-import { getWorkerByPhone } from '../services/mongodb/workers';
-import { downloadMedia, markAsRead } from '../services/whatsapp/client';
-import { sendTextMessage } from '../services/whatsapp/client';
+import { getWorkerByPhone, appendCheckIn, updateRiskLevel } from '../services/mongodb/workers';
+import { downloadMedia, markAsRead, sendTextMessage } from '../services/whatsapp/client';
 import { transcribeAudio } from '../services/gemini/transcribe';
-import { appendCheckIn, updateRiskLevel } from '../services/mongodb/workers';
 import { runSAFARAgent } from '../agent';
 import { analyzeWorkerContract } from '../flows/contract-analysis';
 import { handleRegistrationFlow, isInRegistrationSession, startRegistration } from '../flows/registration';
-import { WhatsAppWebhookBody } from '../types';
+import type { WhatsAppWebhookBody } from '../types';
 
 export const webhookRouter = Router();
 

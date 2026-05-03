@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongodb';
+import type { ObjectId } from 'mongodb';
 
 // ─── Severity ─────────────────────────────────────────────────────────────────
 
@@ -20,7 +20,7 @@ export interface WorkerProfile {
   phone: string;
   familyPhone: string;
   destination: {
-    country: string;          // ISO 2-letter code: QA, AE, SA, MY...
+    country: string;
     countryName: string;
     employer: string;
     sector: 'construction' | 'domestic' | 'manufacturing' | 'hospitality' | 'agriculture' | 'other';
@@ -86,7 +86,7 @@ export interface CheckIn {
   timestamp: Date;
   method: 'voice' | 'text' | 'button' | 'sms';
   rawTranscript?: string;
-  sentimentScore: number;       // -1 (distress) to 1 (positive)
+  sentimentScore: number;
   sentimentLabel: 'positive' | 'neutral' | 'concerned' | 'distressed' | 'emergency';
   detectedIssues: string[];
   severity: SeverityLevel;
@@ -99,9 +99,9 @@ export interface CheckIn {
 export type ViolationType =
   | 'wage_theft'
   | 'passport_confiscation'
-  | 'contract_substitution'
   | 'physical_abuse'
   | 'illegal_confinement'
+  | 'contract_substitution'
   | 'overwork'
   | 'unsafe_conditions'
   | 'unpaid_overtime'
@@ -155,7 +155,7 @@ export interface EmployerRecord {
   company: string;
   country: string;
   sector: string;
-  safetyScore: number;           // 0–100
+  safetyScore: number;
   totalWorkers: number;
   totalComplaints: number;
   resolvedComplaints: number;
@@ -183,7 +183,7 @@ export interface RecruiterRecord {
   dofeLicense: string;
   phone: string;
   address: string;
-  trustScore: number;            // 0–100, community-calculated
+  trustScore: number;
   totalRatings: number;
   ratings: RecruiterRating[];
   dofEBlacklisted: boolean;
@@ -194,9 +194,9 @@ export interface RecruiterRecord {
 
 export interface RecruiterRating {
   workerId: string;
-  score: number;                 // 1–5
+  score: number;
   contractHonored: boolean;
-  feesCharged: boolean;          // true = charged fees (FVFT violation)
+  feesCharged: boolean;
   feesAmountNPR?: number;
   comment?: string;
   submittedAt: Date;

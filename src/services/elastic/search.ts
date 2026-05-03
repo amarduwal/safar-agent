@@ -1,5 +1,5 @@
 import { getElastic, INDICES } from './client';
-import { LaborLaw, NGORecord, ViolationType } from '../../types';
+import type { LaborLaw, NGORecord, ViolationType } from '../../types';
 
 export async function getLaborLaw(country: string, violationType: ViolationType): Promise<LaborLaw | null> {
   const client = getElastic();

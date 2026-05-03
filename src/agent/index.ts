@@ -1,14 +1,11 @@
-import { getModel } from '../services/gemini/client';
 import { analyzeSentiment, generateComplaintLetter, generateWorkerResponseNe } from '../services/gemini/analyze';
 import { getLaborLaw, getNGOsForCase, searchEmployerIntelligence, detectEmployerPattern, recordEmployerPattern } from '../services/elastic/search';
-import { getWorkerById } from '../services/mongodb/workers';
 import { createCase, appendTimeline, updateNGOAssignment } from '../services/mongodb/cases';
 import { sendFamilyAlert, sendNGONotification, sendEvidenceChecklist } from '../services/whatsapp/messages';
 import { logPrediction, createPredictionId } from '../services/arize/monitor';
-import { SAFAR_SYSTEM_PROMPT, EVIDENCE_CHECKLISTS } from './prompts';
-import { SAFAR_TOOLS } from './tools';
-import { AgentContext, AgentResponse, SeverityLevel, ViolationType, WorkerProfile, CaseFile } from '../types';
-import { EMBASSY_CONTACTS, NGO_CONTACTS } from '../config';
+import { EVIDENCE_CHECKLISTS } from './prompts';
+import type { AgentContext, AgentResponse, ViolationType, WorkerProfile, CaseFile } from '../types';
+import { EMBASSY_CONTACTS } from '../config';
 import { v4 as uuidv4 } from 'uuid';
 
 export async function runSAFARAgent(ctx: AgentContext): Promise<AgentResponse> {
@@ -80,7 +77,7 @@ export async function runSAFARAgent(ctx: AgentContext): Promise<AgentResponse> {
   const employer = ctx.worker.destination.employer;
 
   // Parallel intelligence gathering
-  const [laborLaw, employerHistory, patternCount, ngos] = await Promise.all([
+  const [, employerHistory, patternCount, ngos] = await Promise.all([
     getLaborLaw(country, primaryViolation),
     searchEmployerIntelligence(employer, country),
     detectEmployerPattern(employer, primaryViolation),

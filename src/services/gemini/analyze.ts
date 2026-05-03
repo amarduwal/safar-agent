@@ -1,5 +1,5 @@
 import { getModel, getVisionModel } from './client';
-import { ContractRecord, SeverityLevel, CheckIn, ViolationType } from '../../types';
+import type { ContractRecord, SeverityLevel, CheckIn, ViolationType } from '../../types';
 import { MINIMUM_WAGES_NPR } from '../../config';
 import crypto from 'crypto';
 
