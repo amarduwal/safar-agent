@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  safar-api:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - .env
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:7.0
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: safar
+      MONGO_INITDB_ROOT_PASSWORD: safar_local_dev
+      MONGO_INITDB_DATABASE: safar
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+  dashboard:
+    build: ./dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+    restart: unless-stopped
+
+volumes:
+  mongo_data:

@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-navy-900 text-white;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Devanagari text rendering */
+  .font-devanagari {
+    font-family: 'Noto Sans Devanagari', 'Mangal', serif;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-800;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/20 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/30;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-white/10 bg-navy-800/60 backdrop-blur-sm;
+  }
+
+  .card-header {
+    @apply border-b border-white/10 px-5 py-4;
+  }
+
+  .card-body {
+    @apply px-5 py-4;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-lg bg-safar-green px-4 py-2 text-sm font-semibold text-white
+           hover:bg-safar-green-dark focus:outline-none focus:ring-2 focus:ring-safar-green focus:ring-offset-2
+           focus:ring-offset-navy-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-white/80
+           hover:bg-white/5 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/20
+           transition-colors;
+  }
+
+  .input-field {
+    @apply block w-full rounded-lg border border-white/20 bg-navy-700/50 px-4 py-3 text-white placeholder-white/30
+           focus:border-safar-green/60 focus:outline-none focus:ring-2 focus:ring-safar-green/30
+           transition-colors text-sm;
+  }
+
+  .stat-card {
+    @apply card p-5 flex flex-col gap-1;
+  }
+
+  /* Emergency pulse animation for BLACK severity */
+  .emergency-pulse {
+    animation: emergencyPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes emergencyPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+}
