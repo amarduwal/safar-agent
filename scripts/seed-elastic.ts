@@ -26,13 +26,13 @@ const LAWS: LaborLaw[] = [
 ];
 
 const NGOS: Array<Omit<NGORecord, '_id'>> = [
-  { name: 'Pourakhi Nepal', country: 'QA', specialization: ['wage_theft', 'passport_confiscation', 'physical_abuse', 'illegal_confinement', 'trafficking'], phone: '+977-1-4353556', email: 'pourakhi@gmail.com', whatsapp: '+977-9841234567', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 4 },
-  { name: 'Pourakhi Nepal', country: 'AE', specialization: ['wage_theft', 'passport_confiscation', 'physical_abuse', 'illegal_confinement'], phone: '+977-1-4353556', email: 'pourakhi@gmail.com', whatsapp: '+977-9841234567', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 4 },
-  { name: 'Pourakhi Nepal', country: 'SA', specialization: ['wage_theft', 'passport_confiscation', 'physical_abuse'], phone: '+977-1-4353556', email: 'pourakhi@gmail.com', whatsapp: '+977-9841234567', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 4 },
-  { name: 'PNCC (Pravasi Nepali Coordination Committee)', country: 'QA', specialization: ['wage_theft', 'contract_substitution', 'wrongful_termination', 'overwork'], phone: '+977-1-4720288', email: 'info@pncc.org.np', whatsapp: '+977-9851234567', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 8 },
-  { name: 'PNCC (Pravasi Nepali Coordination Committee)', country: 'AE', specialization: ['wage_theft', 'contract_substitution', 'wrongful_termination'], phone: '+977-1-4720288', email: 'info@pncc.org.np', whatsapp: '+977-9851234567', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 8 },
-  { name: 'Sancharika Samuha', country: 'MY', specialization: ['wage_theft', 'passport_confiscation', 'trafficking', 'physical_abuse', 'illegal_confinement'], phone: '+977-1-4352124', email: 'sancharika@gmail.com', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 12 },
-  { name: 'GEFONT (General Federation of Nepalese Trade Unions)', country: 'QA', specialization: ['wage_theft', 'overwork', 'unsafe_conditions', 'wrongful_termination'], phone: '+977-1-4240986', email: 'info@gefont.org', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 24 },
+  { name: 'Pourakhi Nepal', country: 'QA', specialization: ['wage_theft', 'passport_confiscation', 'physical_abuse', 'illegal_confinement', 'trafficking'], phone: '+97714353556', email: 'pourakhi@gmail.com', whatsapp: '+9779840051005', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 4 },
+  { name: 'Pourakhi Nepal', country: 'AE', specialization: ['wage_theft', 'passport_confiscation', 'physical_abuse', 'illegal_confinement'], phone: '+97714353556', email: 'pourakhi@gmail.com', whatsapp: '+9779840051005', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 4 },
+  { name: 'Pourakhi Nepal', country: 'SA', specialization: ['wage_theft', 'passport_confiscation', 'physical_abuse'], phone: '+97714353556', email: 'pourakhi@gmail.com', whatsapp: '+9779840051005', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 4 },
+  { name: 'PNCC (Pravasi Nepali Coordination Committee)', country: 'QA', specialization: ['wage_theft', 'contract_substitution', 'wrongful_termination', 'overwork'], phone: '+97714720288', email: 'info@pncc.org.np', whatsapp: '+9779851234567', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 8 },
+  { name: 'PNCC (Pravasi Nepali Coordination Committee)', country: 'AE', specialization: ['wage_theft', 'contract_substitution', 'wrongful_termination'], phone: '+97714720288', email: 'info@pncc.org.np', whatsapp: '+9779851234567', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 8 },
+  { name: 'Sancharika Samuha', country: 'MY', specialization: ['wage_theft', 'passport_confiscation', 'trafficking', 'physical_abuse', 'illegal_confinement'], phone: '+97714352124', email: 'sancharika@gmail.com', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 12 },
+  { name: 'GEFONT (General Federation of Nepalese Trade Unions)', country: 'QA', specialization: ['wage_theft', 'overwork', 'unsafe_conditions', 'wrongful_termination'], phone: '+97714240986', email: 'info@gefont.org', address: 'Kathmandu, Nepal', languages: ['ne', 'en'], responseTimeHours: 24 },
 ];
 
 async function seed(): Promise<void> {
@@ -58,8 +58,8 @@ async function seed(): Promise<void> {
   const employers = [
     { company: 'Gulf Construction LLC', country: 'QA', safetyScore: 45, violations: ['wage_theft', 'passport_confiscation'], headline: 'Gulf Construction LLC workers report 3-month salary delay', source: 'Kathmandu Post', date: '2026-02-15' },
     { company: 'Al Baraka Cleaning Services', country: 'AE', safetyScore: 35, violations: ['passport_confiscation', 'contract_substitution'], headline: 'Al Baraka workers stranded in Dubai, passports held', source: 'Kantipur', date: '2026-01-20' },
-    { company: 'Petron Industrial', country: 'QA', safetyScore: 78, violations: [], headline: '', source: '', date: '' },
-    { company: 'Nakheel Properties', country: 'AE', safetyScore: 82, violations: [], headline: '', source: '', date: '' },
+    { company: 'Petron Industrial', country: 'SA', safetyScore: 78, violations: [], headline: null, source: null, date: null },
+    { company: 'Nakheel Properties', country: 'AE', safetyScore: 82, violations: [], headline: null, source: null, date: null },
   ];
 
   for (const emp of employers) {
@@ -67,7 +67,8 @@ async function seed(): Promise<void> {
   }
   console.log('✅ Employer intel indexed');
 
-  await client.indices.refresh({ index: Object.values(INDICES).join(',') });
+  const seededIndices = [INDICES.LAWS, INDICES.NGOS, INDICES.EMPLOYERS].join(',');
+  await client.indices.refresh({ index: seededIndices });
   console.log('\n✅ Elastic seeding complete!');
   process.exit(0);
 }

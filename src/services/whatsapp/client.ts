@@ -3,6 +3,10 @@ import { config } from '../../config';
 
 const BASE_URL = 'https://graph.facebook.com/v20.0';
 
+function toE164(phone: string): string {
+  return phone.replace(/[^\d+]/g, '').replace(/^00/, '+');
+}
+
 export async function downloadMedia(mediaId: string): Promise<{ buffer: Buffer; mimeType: string }> {
   const metaRes = await axios.get(`${BASE_URL}/${mediaId}`, {
     headers: { Authorization: `Bearer ${config.whatsapp.token}` },
@@ -23,7 +27,7 @@ export async function sendTextMessage(to: string, body: string): Promise<void> {
     `${BASE_URL}/${config.whatsapp.phoneNumberId}/messages`,
     {
       messaging_product: 'whatsapp',
-      to,
+      to: toE164(to),
       type: 'text',
       text: { body, preview_url: false },
     },
@@ -40,7 +44,7 @@ export async function sendInteractiveButtons(
     `${BASE_URL}/${config.whatsapp.phoneNumberId}/messages`,
     {
       messaging_product: 'whatsapp',
-      to,
+      to: toE164(to),
       type: 'interactive',
       interactive: {
         type: 'button',

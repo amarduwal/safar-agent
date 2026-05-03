@@ -206,6 +206,8 @@ async function seed(): Promise<void> {
 
   await db.collection('workers').deleteMany({ workerId: { $in: DEMO_WORKERS.map(w => w.workerId) } });
   await db.collection('cases').deleteMany({ caseId: { $in: DEMO_CASES.map(c => c.caseId) } });
+  await db.collection('employers').deleteMany({ employerId: { $in: DEMO_EMPLOYERS.map(e => e.employerId) } });
+  await db.collection('recruiters').deleteMany({ recruiterId: { $in: DEMO_RECRUITERS.map(r => r.recruiterId) } });
 
   await db.collection('workers').insertMany(DEMO_WORKERS as WorkerProfile[]);
   console.log(`✅ ${DEMO_WORKERS.length} demo workers created`);
