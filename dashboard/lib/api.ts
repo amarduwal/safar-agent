@@ -25,14 +25,15 @@ async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
     let message = `API error ${res.status}`;
     try {
       const body = await res.json();
-      message = body?.message ?? message;
+      message = body?.error ?? body?.message ?? message;
     } catch {
       // ignore JSON parse errors
     }
     throw new Error(message);
   }
 
-  return res.json() as Promise<T>;
+  const envelope = await res.json() as { success: boolean; data: T };
+  return envelope.data;
 }
 
 /**
@@ -42,8 +43,15 @@ async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
 export async function getWorkerByPhone(
   phone: string,
 ): Promise<FamilyLookupResponse> {
-  // Normalise phone: strip spaces and leading zeros for consistency
-  const normalised = phone.replace(/\s+/g, '').replace(/^0+/, '');
+  // Normalise to E.164: strip spaces/dashes, add +977 if no country code
+  let normalised = phone.replace(/[\s\-]/g, '');
+  if (normalised.startsWith('00977')) {
+    normalised = '+977' + normalised.slice(5);
+  } else if (normalised.startsWith('977') && !normalised.startsWith('+')) {
+    normalised = '+' + normalised;
+  } else if (!normalised.startsWith('+')) {
+    normalised = '+977' + normalised;
+  }
   return apiFetch<FamilyLookupResponse>(`/family/${encodeURIComponent(normalised)}`);
 }
 

@@ -9,7 +9,21 @@ import { startDeadManSwitchCron } from './flows/deadman-switch';
 
 const app = express();
 
-app.use(cors({ origin: config.dashboardUrl }));
+const allowedOrigins = [
+  config.dashboardUrl,
+  'http://localhost:3000',
+  'http://localhost:3001',
+];
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.some(o => origin.startsWith(o.replace(/\/$/, '')))) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS blocked: ${origin}`));
+    }
+  },
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
